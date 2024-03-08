@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class AView : MonoBehaviour
 {
+    protected CameraConfiguration _cameraConfiguration = new CameraConfiguration();
     public bool _isActiveOnStart;
     public float _weight;
 
@@ -15,7 +16,7 @@ public abstract class AView : MonoBehaviour
 
     public virtual CameraConfiguration GetConfiguration()
     {
-        return new CameraConfiguration();
+        return _cameraConfiguration;
     }
 
     public void SetActive(bool isActive)
