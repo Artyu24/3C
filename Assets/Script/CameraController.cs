@@ -33,8 +33,11 @@ public class CameraController : MonoBehaviour
         Vector2 sum = Vector2.zero;
         foreach (AView view in _activeViews)
         {
-            CameraConfiguration config = view.GetConfiguration();
-            sum += new Vector2(Mathf.Cos(config._yaw * Mathf.Deg2Rad), Mathf.Sin(config._yaw * Mathf.Deg2Rad)) * view._weight;
+            if (view._isActiveOnStart)
+            {
+                CameraConfiguration config = view.GetConfiguration();
+                sum += new Vector2(Mathf.Cos(config._yaw * Mathf.Deg2Rad), Mathf.Sin(config._yaw * Mathf.Deg2Rad)) * view._weight;
+            }
         }
         return Vector2.SignedAngle(Vector2.right, sum);
     }

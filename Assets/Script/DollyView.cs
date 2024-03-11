@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class DollyView : AView
 {
-    private float _roll;
-    private float _distance;
-    private float _fov;
-    private Vector3 _target;
-    private Rail _rail;
+    public float _roll;
+    public float _distance;
+    public float _fov;
+    public Vector3 _target;
+    public Rail _rail;
     private float _distanceOnRail;
-    private float _speed;
+    public float _speed;
+
+    private void Update()
+    {
+        transform.LookAt(_target);
+
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.D))
+        {
+            float axis = Input.GetAxis("Horizontal");
+            _distanceOnRail += axis * _speed * Time.deltaTime;
+
+            _rail.GetPosition(_distanceOnRail);
+        }
+    }
 }
