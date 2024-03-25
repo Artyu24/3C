@@ -14,14 +14,13 @@ public class DollyView : AView
 
     private void Update()
     {
-        transform.LookAt(_target);
+        Camera.main.transform.LookAt(_target);
 
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D))
         {
             float axis = Input.GetAxis("Horizontal");
             _distanceOnRail += axis * _speed * Time.deltaTime;
-
-            _rail.GetPosition(_distanceOnRail);
+            Camera.main.transform.position = _rail.GetPosition(_distanceOnRail);
         }
     }
 }

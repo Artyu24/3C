@@ -22,13 +22,20 @@ public class Rail : MonoBehaviour
 
     public Vector3 GetPosition(float distance)
     {
+
+        distance %= GetLength();
+
+        if (distance < 0)
+            distance += GetLength();
+
+        Debug.Log(distance);
         float lastLenght = 0;
         for (int i = 0; i < _transformList.Count - 1; i++)
         {
             float nextLenght = Vector3.Distance(_transformList[i].position, _transformList[i + 1].position);
-            if (lastLenght + nextLenght >= _lenght)
+            if (lastLenght + nextLenght >= distance)
             {
-                float percent = (distance - lastLenght) / (nextLenght - lastLenght);
+                float percent = (distance - lastLenght) / nextLenght;
                 return Vector3.Lerp(_transformList[i].position, _transformList[i + 1].position, percent);
             }
             else
